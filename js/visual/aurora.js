@@ -54,8 +54,9 @@ export function captureThemeDefaults(state) {
         return;
     }
 
-    const initialIsDark = document.body.classList.contains("dark-mode");
-    document.body.classList.remove("dark-mode");
+    const initialIsDark = document.documentElement.classList.contains("dark-mode") || (document.body && document.body.classList.contains("dark-mode"));
+    document.documentElement.classList.remove("dark-mode");
+    if (document.body) document.body.classList.remove("dark-mode");
 
     const oldBg = document.documentElement.style.getPropertyValue("--bg-gradient");
     const oldPrimary = document.documentElement.style.getPropertyValue("--primary-color");
@@ -70,14 +71,16 @@ export function captureThemeDefaults(state) {
     themeDefaults.light.primaryColor = lightStyles.getPropertyValue("--primary-color").trim();
     themeDefaults.light.primaryColorDark = lightStyles.getPropertyValue("--primary-color-dark").trim();
 
-    document.body.classList.add("dark-mode");
+    document.documentElement.classList.add("dark-mode");
+    if (document.body) document.body.classList.add("dark-mode");
     const darkStyles = getComputedStyle(document.body);
     themeDefaults.dark.gradient = darkStyles.getPropertyValue("--bg-gradient").trim();
     themeDefaults.dark.primaryColor = darkStyles.getPropertyValue("--primary-color").trim();
     themeDefaults.dark.primaryColorDark = darkStyles.getPropertyValue("--primary-color-dark").trim();
 
     if (!initialIsDark) {
-        document.body.classList.remove("dark-mode");
+        document.documentElement.classList.remove("dark-mode");
+        if (document.body) document.body.classList.remove("dark-mode");
     }
 
     if (oldBg) document.documentElement.style.setProperty("--bg-gradient", oldBg);
@@ -155,7 +158,7 @@ export function applyDynamicGradient(state, dom, options = {}) {
     if (!state.themeDefaultsCaptured) {
         captureThemeDefaults(state);
     }
-    const isDark = document.body.classList.contains("dark-mode");
+    const isDark = document.documentElement.classList.contains("dark-mode");
     const mode = isDark ? "dark" : "light";
     const defaults = themeDefaults[mode];
     const immediate = Boolean(options.immediate);
@@ -532,7 +535,10 @@ export function initTheme(dom, state) {
         if (!state.themeDefaultsCaptured) {
             captureThemeDefaults(state);
         }
-        document.body.classList.toggle("dark-mode", isDark);
+        document.documentElement.classList.toggle("dark-mode", isDark);
+        if (document.body) {
+            document.body.classList.toggle("dark-mode", isDark);
+        }
         if (dom.themeToggleButton) {
             dom.themeToggleButton.classList.toggle("is-dark", isDark);
             const label = isDark ? "切换为浅色模式" : "切换为深色模式";
@@ -551,7 +557,7 @@ export function initTheme(dom, state) {
     if (dom.themeToggleButton && !dom.themeToggleButton.__themeBound) {
         dom.themeToggleButton.__themeBound = true;
         dom.themeToggleButton.addEventListener("click", () => {
-            const isDark = !document.body.classList.contains("dark-mode");
+            const isDark = !document.documentElement.classList.contains("dark-mode");
             applyTheme(isDark);
             safeSetLocalStorage("theme", isDark ? "dark" : "light");
         });
