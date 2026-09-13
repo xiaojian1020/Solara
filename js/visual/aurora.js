@@ -213,14 +213,7 @@ export function applyDynamicGradient(state, dom, options = {}) {
     }
 
     const syncSystemThemeColor = () => {
-        let themeColor = isDark ? "#0e3029" : "#f5f7fa";
-        if (palette && Array.isArray(targetColors) && targetColors.length >= 3) {
-            if (isDark) {
-                themeColor = targetColors[2] || targetColors[3] || targetColors[0] || "#0e3029";
-            } else {
-                themeColor = targetColors[0] || "#f5f7fa";
-            }
-        }
+        const themeColor = isDark ? "#000000" : "#ffffff";
         try {
             let metaTheme = document.getElementById("metaThemeColor") || document.querySelector('meta[name="theme-color"]');
             if (!metaTheme) {
@@ -232,8 +225,14 @@ export function applyDynamicGradient(state, dom, options = {}) {
             metaTheme.setAttribute("content", themeColor);
             if (window.__SOLARA_IS_MOBILE) {
                 document.documentElement.style.backgroundColor = themeColor;
+                if (document.body) {
+                    document.body.style.backgroundColor = themeColor;
+                }
             } else {
                 document.documentElement.style.removeProperty("background-color");
+                if (document.body) {
+                    document.body.style.removeProperty("background-color");
+                }
             }
         } catch (_) {}
     };

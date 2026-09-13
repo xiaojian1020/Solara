@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Solara</title>
-    <meta name="theme-color" content="#06070a" id="metaThemeColor">
+    <meta name="theme-color" content="#000000" id="metaThemeColor">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -40,7 +40,7 @@
                     document.documentElement.classList.remove("dark-mode");
                 }
                 if (isMobile) {
-                    const defaultColor = isDark ? "#0e3029" : "#f5f7fa";
+                    const defaultColor = isDark ? "#000000" : "#ffffff";
                     const meta = document.getElementById("metaThemeColor");
                     if (meta) meta.setAttribute("content", defaultColor);
                     document.documentElement.style.backgroundColor = defaultColor;
@@ -61,7 +61,6 @@
             link.href = "css/mobile.css";
             link.id = "mobileStylesheet";
             document.head.appendChild(link);
-            let stableViewportHeight = window.innerHeight;
             const setViewportUnit = () => {
                 const vv = window.visualViewport;
                 const winH = window.innerHeight;
@@ -79,10 +78,10 @@
                 }
                 document.documentElement.style.setProperty("--keyboard-height", `${keyboardHeight}px`);
 
-                // 只有在没有键盘弹起（真实改变屏幕大小/旋转）时才更新稳定视口高度
-                if (!isKeyboardOpen || !stableViewportHeight) {
-                    stableViewportHeight = currentH;
+                if (isKeyboardOpen) {
                     document.documentElement.style.setProperty("--mobile-vh", `${currentH}px`);
+                } else {
+                    document.documentElement.style.setProperty("--mobile-vh", "100%");
                 }
             };
 
