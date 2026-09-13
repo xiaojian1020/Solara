@@ -102,15 +102,6 @@
 ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb-bg); border-radius: 999px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
 
-html {
-    background-color: #06070a;
-    transition: background-color 0.4s ease;
-}
-
-html:not(.dark-mode) {
-    background-color: #f5f7fa;
-}
-
 body {
     font-family: var(--font-main);
     display: flex;
@@ -121,14 +112,10 @@ body {
     padding: clamp(12px, 2vw, 24px);
     box-sizing: border-box;
     color: var(--text-color);
-    transition: color 0.5s, background-color 0.4s ease;
+    transition: color 0.5s;
     background-color: #06070a;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-
-body:not(.dark-mode) {
-    background-color: #f5f7fa;
 }
 
 /* ─── Apple Music 沉浸式极光流体舞台 ──────────────────────────── */

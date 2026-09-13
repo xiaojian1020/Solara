@@ -24,6 +24,12 @@
     <script src="js/i18n.js"></script>
     <script>
         (function () {
+            const ua = navigator.userAgent || "";
+            const isMobileUA = /android|iphone|ipad|ipod|mobile|blackberry|phone|opera mini|windows phone/i.test(ua);
+            const isSmallScreen = typeof window.matchMedia === "function" && window.matchMedia("(max-width: 820px)").matches;
+            const isMobile = isMobileUA || isSmallScreen;
+            window.__SOLARA_IS_MOBILE = isMobile;
+
             try {
                 const savedTheme = localStorage.getItem("theme");
                 const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -32,17 +38,14 @@
                     document.documentElement.classList.add("dark-mode");
                 } else {
                     document.documentElement.classList.remove("dark-mode");
+                }
+                if (isMobile) {
+                    const defaultColor = isDark ? "#0e3029" : "#f5f7fa";
                     const meta = document.getElementById("metaThemeColor");
-                    if (meta) meta.setAttribute("content", "#f5f7fa");
-                    document.documentElement.style.backgroundColor = "#f5f7fa";
+                    if (meta) meta.setAttribute("content", defaultColor);
+                    document.documentElement.style.backgroundColor = defaultColor;
                 }
             } catch (_) {}
-
-            const ua = navigator.userAgent || "";
-            const isMobileUA = /android|iphone|ipad|ipod|mobile|blackberry|phone|opera mini|windows phone/i.test(ua);
-            const isSmallScreen = typeof window.matchMedia === "function" && window.matchMedia("(max-width: 820px)").matches;
-            const isMobile = isMobileUA || isSmallScreen;
-            window.__SOLARA_IS_MOBILE = isMobile;
             if (!isMobile) {
                 document.documentElement.classList.add("desktop-view");
                 const desktopLink = document.createElement("link");
@@ -141,13 +144,6 @@
             }
         }
     </style>
-    <script>
-        (function fixMobileVH(){
-            document.documentElement.style.setProperty("--mobile-vh", window.innerHeight + "px");
-            window.addEventListener("resize", fixMobileVH);
-            window.addEventListener("orientationchange", fixMobileVH);
-        })();
-    </script>
 
 </head>
 <body>
