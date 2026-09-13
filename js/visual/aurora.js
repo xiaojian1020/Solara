@@ -212,6 +212,28 @@ export function applyDynamicGradient(state, dom, options = {}) {
         }
     }
 
+    const syncSystemThemeColor = () => {
+        let themeColor = isDark ? "#06070a" : "#f5f7fa";
+        if (palette && Array.isArray(targetColors) && targetColors.length >= 3) {
+            if (isDark) {
+                themeColor = targetColors[2] || targetColors[3] || targetColors[0] || "#06070a";
+            } else {
+                themeColor = targetColors[0] || "#f5f7fa";
+            }
+        }
+        try {
+            let metaTheme = document.getElementById("metaThemeColor") || document.querySelector('meta[name="theme-color"]');
+            if (!metaTheme) {
+                metaTheme = document.createElement("meta");
+                metaTheme.name = "theme-color";
+                metaTheme.id = "metaThemeColor";
+                document.head.appendChild(metaTheme);
+            }
+            metaTheme.setAttribute("content", themeColor);
+            document.documentElement.style.backgroundColor = themeColor;
+        } catch (_) {}
+    };
+
     const applyGlobalColorsAndTokens = () => {
         setGlobalThemeProperty("--palette-c1", targetColors[0]);
         setGlobalThemeProperty("--palette-c2", targetColors[1]);
@@ -220,6 +242,7 @@ export function applyDynamicGradient(state, dom, options = {}) {
         setGlobalThemeProperty("--palette-accent", targetColors[4]);
         setGlobalThemeProperty("--palette-glow", `${targetColors[4]}66`);
         applyThemeTokens(targetTokens);
+        syncSystemThemeColor();
     };
 
     if (immediate || !dom.backgroundTransitionLayer || !dom.backgroundBaseLayer) {

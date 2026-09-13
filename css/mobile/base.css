@@ -20,6 +20,15 @@ body.mobile-view {
     -webkit-user-select: none;
 }
 
+html.mobile-view {
+    background-color: #06070a;
+    transition: background-color 0.4s ease;
+}
+
+html.mobile-view:not(.dark-mode) {
+    background-color: #f5f7fa;
+}
+
 body.mobile-view {
     display: flex;
     justify-content: center;

@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Solara</title>
+    <meta name="theme-color" content="#06070a" id="metaThemeColor">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Solara">
+    <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
     <link rel="shortcut icon" href="/favicon.png">
@@ -19,6 +24,20 @@
     <script src="js/i18n.js"></script>
     <script>
         (function () {
+            try {
+                const savedTheme = localStorage.getItem("theme");
+                const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+                const isDark = savedTheme ? savedTheme === "dark" : prefersDark;
+                if (isDark) {
+                    document.documentElement.classList.add("dark-mode");
+                } else {
+                    document.documentElement.classList.remove("dark-mode");
+                    const meta = document.getElementById("metaThemeColor");
+                    if (meta) meta.setAttribute("content", "#f5f7fa");
+                    document.documentElement.style.backgroundColor = "#f5f7fa";
+                }
+            } catch (_) {}
+
             const ua = navigator.userAgent || "";
             const isMobileUA = /android|iphone|ipad|ipod|mobile|blackberry|phone|opera mini|windows phone/i.test(ua);
             const isSmallScreen = typeof window.matchMedia === "function" && window.matchMedia("(max-width: 820px)").matches;
