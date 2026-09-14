@@ -9,11 +9,7 @@ html.mobile-view {
     padding: 0;
     width: 100%;
     height: 100%;
-    height: -webkit-fill-available;
-    height: var(--mobile-vh, 100dvh);
     min-height: 100%;
-    min-height: -webkit-fill-available;
-    min-height: var(--mobile-vh, 100dvh);
     overflow: hidden;
     touch-action: pan-y;
     overscroll-behavior: none;
@@ -22,11 +18,16 @@ html.mobile-view {
     user-select: none;
     -webkit-user-select: none;
     background-color: #06070a;
+    background-image: var(--bg-gradient);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     transition: background-color 0.4s ease;
 }
 
 html.mobile-view:not(.dark-mode) {
     background-color: #f5f7fa;
+    background-image: var(--bg-gradient);
 }
 
 body.mobile-view {
@@ -46,8 +47,6 @@ body.mobile-view {
     left: 0;
     width: 100%;
     height: 100%;
-    height: -webkit-fill-available;
-    height: var(--mobile-vh, 100dvh);
     overflow: hidden;
     touch-action: pan-y;
     overscroll-behavior: none;
@@ -64,10 +63,8 @@ body.mobile-view .background-stage {
     right: 0;
     bottom: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100%;
-    height: -webkit-fill-available;
-    height: 100dvh;
     min-height: 100%;
     background: transparent;
     z-index: -1;
@@ -159,11 +156,7 @@ body.mobile-view .container {
     width: 100%;
     max-width: 540px;
     height: 100%;
-    height: -webkit-fill-available;
-    height: var(--mobile-vh, 100dvh);
     min-height: 100%;
-    min-height: -webkit-fill-available;
-    min-height: var(--mobile-vh, 100dvh);
     max-height: none;
     margin: 0 auto;
     background: transparent;
