@@ -40,7 +40,7 @@
                     document.documentElement.classList.remove("dark-mode");
                 }
                 if (isMobile) {
-                    const defaultColor = isDark ? "#000000" : "#ffffff";
+                    const defaultColor = isDark ? "#06070a" : "#f5f7fa";
                     const meta = document.getElementById("metaThemeColor");
                     if (meta) meta.setAttribute("content", defaultColor);
                     document.documentElement.style.backgroundColor = defaultColor;
@@ -81,7 +81,7 @@
                 if (isKeyboardOpen) {
                     document.documentElement.style.setProperty("--mobile-vh", `${currentH}px`);
                 } else {
-                    document.documentElement.style.setProperty("--mobile-vh", "100%");
+                    document.documentElement.style.removeProperty("--mobile-vh");
                 }
             };
 
@@ -99,7 +99,6 @@
 
             window.addEventListener("resize", setViewportUnit);
             window.addEventListener("orientationchange", () => {
-                stableViewportHeight = window.innerHeight;
                 setViewportUnit();
             });
             if (window.visualViewport) {
@@ -124,7 +123,6 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            overflow-x: hidden;
             box-sizing: border-box;
         }
         .login-shell {
@@ -133,14 +131,12 @@
             transform: translateX(-50%);
             margin-inline: auto;
         }
-        body {
+        body:not(.mobile-view) {
             padding-left: max(env(safe-area-inset-left), 16px);
             padding-right: max(env(safe-area-inset-right), 16px);
         }
-        @supports (height: 100dvh) {
-            :root {
-                --mobile-vh: 100dvh;
-            }
+        :root {
+            --mobile-vh: 100dvh;
         }
     </style>
 
