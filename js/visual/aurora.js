@@ -216,7 +216,7 @@ export function applyDynamicGradient(state, dom, options = {}) {
     }
 
     const syncSystemThemeColor = () => {
-        const themeColor = isDark ? "#06070a" : "#f5f7fa";
+        const themeColor = isDark ? "#06070a" : "#cbd9d4";
         try {
             let metaTheme = document.getElementById("metaThemeColor") || document.querySelector('meta[name="theme-color"]');
             if (!metaTheme) {

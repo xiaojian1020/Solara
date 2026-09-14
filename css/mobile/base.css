@@ -26,7 +26,7 @@ html.mobile-view {
 }
 
 html.mobile-view:not(.dark-mode) {
-    background-color: #f5f7fa;
+    background-color: #cbd9d4;
     background-image: var(--bg-gradient);
 }
 
@@ -175,6 +175,17 @@ body.mobile-view .container {
     grid-template-columns: none;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
+}
+
+/* 在 iOS Web App Standalone 模式下，避免双重安全区缩进 */
+html.ios-standalone body.mobile-view .container {
+    padding-bottom: clamp(14px, 4vw, 20px);
+}
+
+@media (display-mode: standalone) {
+    body.mobile-view .container {
+        padding-bottom: clamp(14px, 4vw, 20px);
+    }
 }
 
 /* 隐藏桌面端专有的大头部元素与标语 */
