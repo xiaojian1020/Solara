@@ -7,7 +7,6 @@
     <meta name="theme-color" content="#000000" id="metaThemeColor">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Solara">
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -30,11 +29,6 @@
             const isMobile = isMobileUA || isSmallScreen;
             window.__SOLARA_IS_MOBILE = isMobile;
 
-            const isStandalone = Boolean(window.navigator.standalone || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches));
-            if (isStandalone) {
-                document.documentElement.classList.add("ios-standalone");
-            }
-
             try {
                 const savedTheme = localStorage.getItem("theme");
                 const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -45,7 +39,7 @@
                     document.documentElement.classList.remove("dark-mode");
                 }
                 if (isMobile) {
-                    const defaultColor = isDark ? "#06070a" : "#cbd9d4";
+                    const defaultColor = isDark ? "#06070a" : "#f5f7fa";
                     const meta = document.getElementById("metaThemeColor");
                     if (meta) meta.setAttribute("content", defaultColor);
                     document.documentElement.style.backgroundColor = defaultColor;
