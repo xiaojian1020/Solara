@@ -1,8 +1,10 @@
 # 🎶 Solara 2.0（光域）
 
-[![#1 JavaScript Repository Of The Day](https://trendshift.io/api/badge/trendshift/repositories/23480/daily?language=JavaScript)](https://trendshift.io/repositories/23480)
-[![#2 JavaScript Repository Of The Week](https://trendshift.io/api/badge/trendshift/repositories/23480/weekly?language=JavaScript)](https://trendshift.io/repositories/23480)
-[![#13 JavaScript Repository Of The Month](https://trendshift.io/api/badge/trendshift/repositories/23480/monthly?language=JavaScript)](https://trendshift.io/repositories/23480)
+<p align="center">
+  <a href="https://trendshift.io/repositories/23480" target="_blank"><img src="https://trendshift.io/api/badge/trendshift/repositories/23480/daily?language=JavaScript" alt="#1 JavaScript Repository Of The Day" width="250" height="55"/></a>
+  <a href="https://trendshift.io/repositories/23480" target="_blank"><img src="https://trendshift.io/api/badge/trendshift/repositories/23480/weekly?language=JavaScript" alt="#2 JavaScript Repository Of The Week" width="250" height="55"/></a>
+  <a href="https://trendshift.io/repositories/23480" target="_blank"><img src="https://trendshift.io/api/badge/trendshift/repositories/23480/monthly?language=JavaScript" alt="#13 JavaScript Repository Of The Month" width="250" height="55"/></a>
+</p>
 
 > 🚀 **Solara 2.0 重磅进化**：由轻量后端服务支撑的现代化网页音乐播放器。2.0 版本彻底告别单体脚本，迈向现代化工业级模块解耦架构，带来网易云三大官方顶尖榜单音乐雷达、全功能自由拖拽与胶囊折叠调试台、Apple Design 深度流体美学与 iPhone 性能优化，以及极致平滑稳定的全平台播放体验。
 
